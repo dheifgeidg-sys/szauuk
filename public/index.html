@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SZAUK</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,3 92,27 92,73 50,97 8,73 8,27" fill="#0a0e0a" stroke="#c9a227" stroke-width="2.5"/>
+                <g fill="#f0c419">
+                    <path id="blade" d="M 54 43.07 L 65 24.02 A 30 30 0 0 0 35 24.02 L 46 43.07 A 8 8 0 0 1 54 43.07 Z"/>
+                    <use href="#blade" transform="rotate(120 50 50)"/>
+                    <use href="#blade" transform="rotate(240 50 50)"/>
+                    <circle cx="50" cy="50" r="5"/>
+                </g>
+            </svg>
+            <h1>SZAUK</h1>
+        </div>
+        <div class="header-right">
+            <span id="status">Проверка...</span>
+            <button id="loginBtn" class="btn-primary" style="display:none;">◈ ВОЙТИ В СЕТЬ</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="panel" id="bargainsPanel" style="display:none;">
+            <h2>🎯 ЗАЛЁТНЫЕ ЛОТЫ <span style="color:#4caf50;font-size:11px;">за 48ч</span></h2>
+            <div id="bargainsContent"></div>
+        </section>
+
+        <section class="panel" id="watchlistPanel" style="display:none;">
+            <h2>⭐ ИЗБРАННОЕ (отслеживается сканером)</h2>
+            <div id="watchlistContent"></div>
+        </section>
+
+        <section class="panel">
+            <h2>ПОИСК ПРЕДМЕТОВ В БАЗЕ</h2>
+            <div class="filters">
+                <div class="filter-group"><label>Название</label><input type="text" id="searchQuery" placeholder="Например: Гадюка"></div>
+                <div class="filter-group"><label>Тип</label><select id="categoryFilter"><option value="">Все категории</option></select></div>
+                <div class="filter-group"><label>Редкость</label><select id="rarityFilter"><option value="">Все редкости</option></select></div>
+                <div class="filter-group"><label>&nbsp;</label><button id="searchItemsBtn" class="btn-primary">НАЙТИ</button></div>
+            </div>
+            <div id="itemsResults"></div>
+            <div id="itemsPagination" class="pagination" style="display:none;">
+                <button id="prevPage" class="btn-page">← НАЗАД</button>
+                <span id="pageInfo">Страница 1</span>
+                <button id="nextPage" class="btn-page">ВПЕРЁД →</button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>ЛОТЫ НА АУКЦИОНЕ <span style="color:#4caf50;font-size:11px;">● LIVE</span></h2>
+            <div class="filters">
+                <div class="filter-group"><label>Регион</label><select id="regionSelect">
+                    <option value="ru">RU</option><option value="eu">EU</option>
+                    <option value="na">NA</option><option value="sea">SEA</option>
+                </select></div>
+                <div class="filter-group"><label>ID предмета</label><input type="text" id="itemId" placeholder="Выберите предмет выше"></div>
+                <div class="filter-group"><label>&nbsp;</label><button id="searchBtn" class="btn-primary">НАЙТИ ЛОТЫ</button></div>
+                <div class="filter-group"><label>&nbsp;</label><button id="historyBtn" class="btn-primary" style="background:#4a6b2a;">📈 ИСТОРИЯ (БД)</button></div>
+            </div>
+            <div id="results"></div>
+            <div id="chartContainer" style="display:none; margin-top:20px;">
+                <canvas id="priceChart" height="120"></canvas>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>💰 КАЛЬКУЛЯТОР ПРИБЫЛИ</h2>
+            <div class="filters">
+                <div class="filter-group"><label>Цена покупки (₽)</label><input type="number" id="calcBuy" placeholder="0"></div>
+                <div class="filter-group"><label>Цена продажи (₽)</label><input type="number" id="calcSell" placeholder="0"></div>
+                <div class="filter-group"><label>Комиссия (%)</label><input type="number" id="calcFee" value="0"></div>
+                <div class="filter-group"><label>&nbsp;</label><button id="calcBtn" class="btn-primary">ПОСЧИТАТЬ</button></div>
+            </div>
+            <div id="calcResult"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
